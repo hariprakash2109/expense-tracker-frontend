@@ -128,30 +128,32 @@ export default function Dashboard() {
         {recentExpenses.length === 0 ? (
           <div className="empty-state">No expenses yet. Start by adding one!</div>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Date</th>
-                <th style={{ textAlign: 'right' }}>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentExpenses.map((e) => (
-                <tr key={e.id}>
-                  <td>{e.title}</td>
-                  <td>
-                    <span className="badge" style={{ background: e.categoryColor + '20', color: e.categoryColor }}>
-                      {e.categoryName}
-                    </span>
-                  </td>
-                  <td>{format(new Date(e.date), 'd MMM yyyy')}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{e.amount.toLocaleString()}</td>
+          <div className="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th style={{ textAlign: 'right' }}>Amount</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {recentExpenses.map((e) => (
+                  <tr key={e.id}>
+                    <td>{e.title}</td>
+                    <td>
+                      <span className="badge" style={{ background: e.categoryColor + '20', color: e.categoryColor }}>
+                        {e.categoryName}
+                      </span>
+                    </td>
+                    <td>{format(new Date(e.date), 'd MMM yyyy')}</td>
+                    <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{e.amount.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>
