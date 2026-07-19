@@ -40,11 +40,7 @@ export default function Footer() {
           <p className="app-footer-tagline">
             Take control of your spending, one expense at a time.
           </p>
-          <div className="app-footer-badges">
-            <span className="app-footer-badge">React</span>
-            <span className="app-footer-badge">C#</span>
-            <span className="app-footer-badge">PostgreSQL</span>
-          </div>
+          
         </div>
 
         <div className="app-footer-col">
