@@ -33,37 +33,23 @@ export default function Reports() {
     setYear(newYear)
   }
 
-  const handleExport = async () => {
-  const token = localStorage.getItem("token");
-
-  const res = await fetch(exportPdfUrl(year, month), {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  console.log("Status:", res.status);
-  console.log("Content-Type:", res.headers.get("content-type"));
-
-  if (!res.ok) {
-    console.log(await res.text());
-    alert("Export failed");
-    return;
+  const handleExport = () => {
+    const token = localStorage.getItem('token')
+    fetch(exportPdfUrl(year, month), {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `Expense_Report_${format(new Date(year, month - 1), 'MMMM_yyyy')}.pdf`
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+        window.URL.revokeObjectURL(url)
+      })
   }
-
-  const blob = await res.blob();
-
-  console.log("Blob Type:", blob.type);
-  console.log("Blob Size:", blob.size);
-
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "report.pdf";
-  a.click();
-
-  window.URL.revokeObjectURL(url);
-};
 
   const monthLabel = format(new Date(year, month - 1), 'MMMM yyyy')
 
@@ -177,26 +163,28 @@ export default function Reports() {
             {report.categoryBreakdown.length === 0 ? (
               <div className="empty-state">No expenses recorded this month.</div>
             ) : (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th style={{ textAlign: 'right' }}>Amount</th>
-                    <th style={{ textAlign: 'right' }}>% of Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {report.categoryBreakdown.map((c, i) => (
-                    <tr key={i}>
-                      <td>
-                        <span className="badge" style={{ background: c.color + '20', color: c.color }}>{c.categoryName}</span>
-                      </td>
-                      <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{c.total.toLocaleString()}</td>
-                      <td style={{ textAlign: 'right' }}>{c.percentage}%</td>
+              <div className="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th style={{ textAlign: 'right' }}>Amount</th>
+                      <th style={{ textAlign: 'right' }}>% of Total</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {report.categoryBreakdown.map((c, i) => (
+                      <tr key={i}>
+                        <td>
+                          <span className="badge" style={{ background: c.color + '20', color: c.color }}>{c.categoryName}</span>
+                        </td>
+                        <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{c.total.toLocaleString()}</td>
+                        <td style={{ textAlign: 'right' }}>{c.percentage}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </>
