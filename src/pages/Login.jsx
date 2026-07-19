@@ -65,6 +65,9 @@ export default function Login() {
           Don't have an account? <Link to="/register" style={{ color: '#6366f1', fontWeight: 600 }}>Sign up</Link>
         </p>
       </div>
+      <div className="auth-page-credit">
+        Developed by <strong>HARI PRAKASH S</strong> 
+      </div>
     </div>
   )
 }
