@@ -104,40 +104,42 @@ export default function Expenses() {
         ) : expenses.length === 0 ? (
           <div className="empty-state">No expenses found. Try adjusting filters or add a new expense.</div>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Payment</th>
-                <th>Date</th>
-                <th style={{ textAlign: 'right' }}>Amount</th>
-                <th style={{ textAlign: 'right' }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {expenses.map((e) => (
-                <tr key={e.id}>
-                  <td>
-                    {e.title}
-                    {e.notes && <div style={{ fontSize: 12, color: '#9ca3af' }}>{e.notes}</div>}
-                  </td>
-                  <td>
-                    <span className="badge" style={{ background: e.categoryColor + '20', color: e.categoryColor }}>
-                      {e.categoryName}
-                    </span>
-                  </td>
-                  <td>{e.paymentMethod}</td>
-                  <td>{format(new Date(e.date), 'd MMM yyyy')}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{e.amount.toLocaleString()}</td>
-                  <td style={{ textAlign: 'right' }}>
-                    <button className="icon-btn" onClick={() => openEditModal(e)}><Pencil size={16} /></button>
-                    <button className="icon-btn" onClick={() => handleDelete(e.id)}><Trash2 size={16} /></button>
-                  </td>
+          <div className="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Payment</th>
+                  <th>Date</th>
+                  <th style={{ textAlign: 'right' }}>Amount</th>
+                  <th style={{ textAlign: 'right' }}>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {expenses.map((e) => (
+                  <tr key={e.id}>
+                    <td>
+                      {e.title}
+                      {e.notes && <div style={{ fontSize: 12, color: '#9ca3af' }}>{e.notes}</div>}
+                    </td>
+                    <td>
+                      <span className="badge" style={{ background: e.categoryColor + '20', color: e.categoryColor }}>
+                        {e.categoryName}
+                      </span>
+                    </td>
+                    <td>{e.paymentMethod}</td>
+                    <td>{format(new Date(e.date), 'd MMM yyyy')}</td>
+                    <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{e.amount.toLocaleString()}</td>
+                    <td style={{ textAlign: 'right' }}>
+                      <button className="icon-btn" onClick={() => openEditModal(e)}><Pencil size={16} /></button>
+                      <button className="icon-btn" onClick={() => handleDelete(e.id)}><Trash2 size={16} /></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 
