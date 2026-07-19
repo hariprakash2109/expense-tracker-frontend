@@ -125,9 +125,15 @@ img, svg { max-width: 100%; }
 
 .main-content {
   flex: 1;
-  padding: 28px 36px;
+  padding: 28px 36px 0;
   overflow-y: auto;
   min-width: 0; /* allow flex children (tables/charts) to shrink properly */
+  display: flex;
+  flex-direction: column;
+}
+
+.page-body {
+  flex: 1;
 }
 
 /* ===================== TOPBAR / TYPOGRAPHY ===================== */
@@ -366,10 +372,22 @@ tr:last-child td { border-bottom: none; }
 .auth-page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   padding: 20px;
+}
+
+.auth-page-credit {
+  margin-top: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+}
+
+.auth-page-credit strong {
+  color: #fff;
 }
 
 .auth-card {
@@ -457,6 +475,112 @@ tr:last-child td { border-bottom: none; }
   align-items: center;
   gap: 12px;
   font-weight: 600;
+}
+
+/* ===================== FOOTER ===================== */
+
+.app-footer {
+  margin-top: 40px;
+  padding: 32px 0 20px;
+  border-top: 1px solid var(--border);
+}
+
+.app-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 28px;
+  padding-bottom: 24px;
+}
+
+.app-footer-col {
+  min-width: 0;
+}
+
+.app-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.app-footer-tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 14px;
+  max-width: 260px;
+}
+
+.app-footer-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.app-footer-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #eef0ff;
+  color: var(--primary);
+}
+
+.app-footer-heading {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.app-footer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.app-footer-list a {
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+
+.app-footer-list a:hover {
+  color: var(--primary);
+}
+
+.app-footer-social-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.app-footer-bottom {
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.app-footer-dot {
+  color: var(--border);
+}
+
+.app-footer-name {
+  color: var(--text);
+  font-weight: 700;
 }
 
 /* ===================== TABLET BREAKPOINT (<=1100px) ===================== */
@@ -572,7 +696,33 @@ tr:last-child td { border-bottom: none; }
     width: 100%;
   }
 
-  /* Stack expense-modal action buttons full width, already flex:1 each so fine */
+  .app-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .app-footer-tagline {
+    max-width: none;
+  }
+
+  .app-footer-badges,
+  .app-footer-brand {
+    justify-content: center;
+  }
+
+  .app-footer-list {
+    align-items: center;
+  }
+
+  .app-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .app-footer-dot {
+    display: none;
+  }
 }
 
 /* ===================== VERY SMALL DEVICES (<=380px) ===================== */
