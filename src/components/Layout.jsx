@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import Footer from './Footer.jsx'
 import {
   LayoutDashboard,
   Receipt,
@@ -103,7 +104,10 @@ export default function Layout() {
       </aside>
 
       <main className="main-content">
-        <Outlet />
+        <div className="page-body">
+                  <Outlet />
+                </div>
+                <Footer />
       </main>
     </div>
   )
