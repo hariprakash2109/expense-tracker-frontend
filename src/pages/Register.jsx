@@ -81,6 +81,9 @@ export default function Register() {
           Already have an account? <Link to="/login" style={{ color: '#6366f1', fontWeight: 600 }}>Sign in</Link>
         </p>
       </div>
+      <div className="auth-page-credit">
+        Developed by <strong>HARI PRAKASH S</strong> 
+      </div>
     </div>
   )
 }
